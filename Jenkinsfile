@@ -12,7 +12,7 @@ pipeline {
             steps {
                 sh '''
                 rm -rf project-jenkins
-				git clone https://github.com/chkion1234/project-jenkins.git
+				git clone https://github.com/Yongheech/project-jenkins.git
 				'''
             }
         }
