@@ -4,6 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE_OWNER = 'chkion1234'
         DOCKER_BUILD_TAG = "20241108.${env.BUILD_NUMBER}"
+        DOCKER_IMAGE_TAG = 'latest'
         DOCKER_TOKEN = credentials('dockerhub') // Docker Hub 자격 증명
         GIT_CREDENTIALS = credentials('github_access_token')
         REPO_URL = 'Yongheech/project-jenkins.git'
@@ -26,7 +27,7 @@ pipeline {
         stage('Docker Image Building') {
             steps {
                 script {
-                    sh "docker build -t ${DOCKER_IMAGE_OWNER}/prj-frontend ./frontend"
+                    sh "docker build -t ${DOCKER_IMAGE_OWNER}/prj-frontend:${DOCKER_IMAGE_TAG} ./frontend"
                     sh "docker build -t ${DOCKER_IMAGE_OWNER}/prj-frontend:${DOCKER_BUILD_TAG} ./frontend"
                     sh "docker build -t ${DOCKER_IMAGE_OWNER}/prj-admin:${DOCKER_BUILD_TAG} ./admin-service"
                     sh "docker build -t ${DOCKER_IMAGE_OWNER}/prj-visitor:${DOCKER_BUILD_TAG} ./visitor-service"
@@ -45,7 +46,7 @@ pipeline {
         stage('Docker Image Pushing') {
             steps {
                 script {
-                    sh "docker push ${DOCKER_IMAGE_OWNER}/prj-frontend"
+                    sh "docker push ${DOCKER_IMAGE_OWNER}/prj-frontend:${DOCKER_IMAGE_TAG}"
                     sh "docker push ${DOCKER_IMAGE_OWNER}/prj-frontend:${DOCKER_BUILD_TAG}"
                     sh "docker push ${DOCKER_IMAGE_OWNER}/prj-admin:${DOCKER_BUILD_TAG}"
                     sh "docker push ${DOCKER_IMAGE_OWNER}/prj-visitor:${DOCKER_BUILD_TAG}"
