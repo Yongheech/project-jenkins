@@ -73,7 +73,7 @@ pipeline {
                             sh '''
                             git config user.name "Yongheech"
                             git config user.email "alpacatnt@jenkins.com"
-                            git add deploy-argocd/values.yaml
+                            git add project-argocd/deploy-argocd/values.yaml
                             git commit -m "Update image tags to ${DOCKER_BUILD_TAG}"
                             '''
                         } else {
