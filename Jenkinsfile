@@ -56,9 +56,9 @@ pipeline {
             steps {
                 dir('project-argocd') {
                     sh """
-                    sed -i "/${DOCKER_IMAGE_OWNER}\\/prj-frontend/{n;s/tag: \\".*\\"/tag: \\"${DOCKER_BUILD_TAG}\\"/}" deploy-argocd/values.yaml
-                    sed -i "/${DOCKER_IMAGE_OWNER}\\/prj-admin/{n;s/tag: \\".*\\"/tag: \\"${DOCKER_BUILD_TAG}\\"/}" deploy-argocd/values.yaml
-                    sed -i "/${DOCKER_IMAGE_OWNER}\\/prj-visitor/{n;s/tag: \\".*\\"/tag: \\"${DOCKER_BUILD_TAG}\\"/}" deploy-argocd/values.yaml
+                    sed -i "/${DOCKER_IMAGE_OWNER}\\/prj-frontend/{n;s/tag: \\".*\\"/tag: \\"${DOCKER_BUILD_TAG}\\"/}" project-argocd/deploy-argocd/values.yaml
+                    sed -i "/${DOCKER_IMAGE_OWNER}\\/prj-admin/{n;s/tag: \\".*\\"/tag: \\"${DOCKER_BUILD_TAG}\\"/}" project-argocd//deploy-argocd/values.yaml
+                    sed -i "/${DOCKER_IMAGE_OWNER}\\/prj-visitor/{n;s/tag: \\".*\\"/tag: \\"${DOCKER_BUILD_TAG}\\"/}" project-argocd//deploy-argocd/values.yaml
                     """
                 }
             }
