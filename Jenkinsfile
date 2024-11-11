@@ -5,7 +5,7 @@ pipeline {
         DOCKER_IMAGE_OWNER = 'chkion1234'
         DOCKER_BUILD_TAG = "v${env.BUILD_NUMBER}"
         DOCKER_TOKEN = credentials('dockerhub')
-        GIT_CREDENTIALS = credentials('github_token')
+        GIT_CREDENTIALS = credentials('github_access_token')
         REPO_URL = 'Yongheech/project-jenkins.git'
         ARGOCD_REPO_URL = 'Yongheech/project-argocd.git'
         COMMIT_MESSAGE = 'Update README.md via Jenkins Pipeline'
@@ -87,7 +87,7 @@ pipeline {
         stage('Push Changes') {
             steps {
                 dir('project-argocd') {
-                    withCredentials([usernamePassword(credentialsId: 'github_token', usernameVariable: 'GIT_CREDENTIALS_USR', passwordVariable: 'GIT_CREDENTIALS_PSW')]) {
+                    withCredentials([usernamePassword(credentialsId: 'github_access_token', usernameVariable: 'GIT_CREDENTIALS_USR', passwordVariable: 'GIT_CREDENTIALS_PSW')]) {
                         sh '''
                         git push https://${GIT_CREDENTIALS_USR}:${GIT_CREDENTIALS_PSW}@github.com/${ARGOCD_REPO_URL} master
                         '''
