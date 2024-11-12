@@ -118,7 +118,7 @@ async def statistics_page(db: Session = Depends(get_db)):
     # 통계 계산
     total_visitors = len(logs)
     total_duration = sum(
-        (log.exit_time - log.entry_time).total_seconds() / 60
+        (log.exit_time.astimezone(kst) - log.entry_time.astimezone(kst)).total_seconds() / 60
         for log in logs if log.entry_time and log.exit_time
     )
     avg_visit_duration = total_duration / total_visitors if total_visitors > 0 else 0
