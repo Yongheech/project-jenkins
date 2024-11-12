@@ -10,7 +10,7 @@ from starlette.requests import Request
 from sqlalchemy.orm import Session
 from starlette.responses import JSONResponse
 from fastapi import HTTPException
-from datetime import datetime
+from datetime import datetime, timezone
 from service import database
 from models.admin import User, Admin, EntryExitLog, Status
 from service.database import get_db
